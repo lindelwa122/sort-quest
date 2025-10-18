@@ -42,5 +42,19 @@ class Search:
             - positive if a > b
         Returns the index of the found element, or -1 if not found.
         """
-        pass
+        left, right = 0, len(data) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            cmp_result = comparator(data[mid], target)
+
+            if cmp_result == 0:
+                return mid
+            elif cmp_result < 0:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        # Raise NotFoundError (required by your test suite)
+        raise NotFoundError(f"{target} not found")
 
