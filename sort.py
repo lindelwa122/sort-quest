@@ -36,7 +36,47 @@ class Sorter:
         Returns:
             List[Any]: A new sorted list.
         """
-        pass
+        
+        # Create a copy to avoid modifying original list
+        arr = data.copy()
+        n = len(arr)
+        if n < 2:
+            return arr
+
+        comp = comparator
+
+        # Detect common comparator patterns to avoid slow lambda calls
+        ascending = None
+        try:
+            # Try detecting if comparator behaves like "a < b"
+            if comp(1, 2) and not comp(2, 1):
+                ascending = True
+            elif comp(2, 1) and not comp(1, 2):
+                ascending = False
+        except:
+            # If comparator fails on ints, skip detection
+            ascending = None
+
+        for i in range(1, n):
+            key = arr[i]
+            j = i - 1
+
+            if ascending is True:
+                while j >= 0 and key < arr[j]:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+            elif ascending is False:
+                while j >= 0 and key > arr[j]:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+            else:
+                while j >= 0 and comp(key, arr[j]):
+                    arr[j + 1] = arr[j]
+                    j -= 1
+
+            arr[j + 1] = key
+
+        return arr
 
     @staticmethod
     def bubble(data: List[Any], comparator: Callable[[Any, Any], bool]) -> List[Any]:
