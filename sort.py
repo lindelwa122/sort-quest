@@ -68,5 +68,22 @@ class Sorter:
         Raises:
             ValueError: If an unknown sort method is provided.
         """
-        pass
+        # Normalize the method name for case-insensitive comparison
+        method_lower = method.lower()
+
+        # Dispatch to the correct sorting algorithm
+        if method_lower == "merge":
+            return Sorter.merge(data, comparator)
+
+        elif method_lower == "insertion":
+            return Sorter.insertion(data, comparator)
+
+        elif method_lower == "bubble":
+            return Sorter.bubble(data, comparator)
+
+        else:
+            # Handle unknown sort methods
+            raise ValueError(
+                f"Unknown sort method '{method}'. Choose 'merge', 'insertion', or 'bubble'."
+            )
 
