@@ -33,14 +33,14 @@ class Search:
     # =====================
     @staticmethod
     def binary(data: List[Any], target: Any, comparator: Callable[[Any, Any], int]) -> Any:
-        """
-        Performs binary search on a sorted list.
-        
-        The comparator should return:
-            - 0 if a == b
-            - negative if a < b
-            - positive if a > b
-        Returns the index of the found element, or -1 if not found.
-        """
-        pass
-
+        left, right = 0, len(data) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            cmp_result = comparator(data[mid], target)
+            if cmp_result == 0:
+                return mid
+            elif cmp_result > 0:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return NotFoundError(target)
