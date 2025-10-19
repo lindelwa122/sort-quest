@@ -42,5 +42,14 @@ class Search:
             - positive if a > b
         Returns the index of the found element, or -1 if not found.
         """
-        pass
-
+        high = len(data) - 1
+        low = 0
+        while low < high:
+            mid = (low + high) // 2
+            if data[mid] == target:
+                return mid
+            if target > data[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1
