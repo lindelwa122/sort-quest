@@ -22,7 +22,43 @@ class Sorter:
         Returns:
             List[Any]: A new sorted list.
         """
-        pass
+        arr = data[:]  # work on a copy to keep immutability
+        temp = [None] * len(arr)  # pre-allocate temp list once (performance gain)
+
+        def merge_sort(start: int, end: int):
+            if end - start <= 1:
+                return
+
+            mid = (start + end) // 2
+            merge_sort(start, mid)
+            merge_sort(mid, end)
+
+            # Merge two sorted halves (in-place using temp)
+            i, j, k = start, mid, start
+            while i < mid and j < end:
+                if comparator(arr[i], arr[j]):
+                    temp[k] = arr[i]
+                    i += 1
+                else:
+                    temp[k] = arr[j]
+                    j += 1
+                k += 1
+
+            # Copy remaining elements
+            while i < mid:
+                temp[k] = arr[i]
+                i += 1
+                k += 1
+            while j < end:
+                temp[k] = arr[j]
+                j += 1
+                k += 1
+
+            # Copy back to arr
+            arr[start:end] = temp[start:end]
+
+        merge_sort(0, len(arr))
+        return arr
 
     @staticmethod
     def insertion(data: List[Any], comparator: Callable[[Any, Any], bool]) -> List[Any]:
