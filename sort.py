@@ -50,7 +50,20 @@ class Sorter:
         Returns:
             List[Any]: A new sorted list.
         """
-        pass
+        arr = data.copy()  # Do not modify original list
+        n = len(arr)
+        
+        for i in range(n):
+            swapped = False
+            for j in range(0, n - i - 1):
+                # If elements are out of order per comparator, swap
+                if not comparator(arr[j], arr[j + 1]):
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                    swapped = True
+            # Optimization: stop if already sorted
+            if not swapped:
+                break
+        return arr
 
     @staticmethod
     def sort(data: List[Any], comparator: Callable[[Any, Any], bool], method: str = "merge") -> List[Any]:
