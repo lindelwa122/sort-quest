@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.13"
+
+[[package]]
+name = "colorful-test"
+version = "1.0.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/be/95/a4b7f6afb80c756f57abfa980b539bc117ba341e9ccdae6550109b56af7e/colorful_test-1.0.2.tar.gz", hash = "sha256:0f9a13fd92f1bc2eb35099b35a25970afb4cb230f15d9071485ff6bc6e6cf739", size = 15358, upload-time = "2025-02-07T15:27:54.376Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6d/6f/596dfc5c26f744def6b6d5882cd0aa766ab6822d90c20fbe00a59b487f07/colorful_test-1.0.2-py3-none-any.whl", hash = "sha256:8037811ccdcf2d91724d691dbe430559aa1e92f5d8b702ce8d76a741051464e7", size = 14842, upload-time = "2025-02-07T15:27:52.098Z" },
+]
+
+[[package]]
+name = "sort-quest"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "colorful-test" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "colorful-test", specifier = ">=1.0.2" }]

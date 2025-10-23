@@ -12,17 +12,27 @@ class Sorter:
 
     @staticmethod
     def merge(data: List[Any], comparator: Callable[[Any, Any], bool]) -> List[Any]:
-        """
-        Sorts the list using the merge sort algorithm.
         
-        Args:
-            data (List[Any]): The list to sort.
-            comparator (Callable[[Any, Any], bool]): Comparison function.
-            
-        Returns:
-            List[Any]: A new sorted list.
-        """
-        pass
+        
+        if len(data) <= 1:
+            return data
+        
+        mid = len(data) // 2
+        left = Sorter.merge(data[:mid], comparator)
+        right = Sorter.merge(data[mid:], comparator)
+        merged = []
+        i = 0
+        j = 0
+        while i < len(left) and j < len(right):
+            if comparator(left[i], right[j]):
+                merged.append(left[i])
+                i += 1
+            else:
+                merged.append(right[j])
+                j += 1
+        merged.extend(left[i:])
+        merged.extend(right[j:])
+        return merged
 
     @staticmethod
     def insertion(data: List[Any], comparator: Callable[[Any, Any], bool]) -> List[Any]:
