@@ -26,6 +26,10 @@ class Search:
         Performs a linear search through the list.
         Returns the index of the target, or -1 if not found.
         """
+        for i, item in enumerate(data):
+            if comparator(item, target):
+                return i
+        return -1
         pass
 
     # =====================
